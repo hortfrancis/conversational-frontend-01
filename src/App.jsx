@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { DebugBar, StartButton, Footer, SpeechInput } from './components';
+import { Welcome, SpeechToSpeech } from './screens';
+import { DebugBar, Footer, SpeechInput } from './components';
 import { sendSpeechAudio } from './lib';
 import { getBrowserName } from './utils';
 
 export default function App() {
     const [serverConnectionState, setServerConnectionState] = useState('');
+    const [appState, setAppState] = useState('welcome');
 
     useEffect(() => {
-        console.log(import.meta.env.VITE_BACKEND_URL);
-
         // Make a generic request to the backend to wake up the server
         (async () => {
             setServerConnectionState('requesting');
@@ -23,6 +23,11 @@ export default function App() {
         })();
     }, []);
 
+    const start = () => {
+        console.log("Starting speech-to-speech");
+        setAppState('speech-to-speech');
+    }
+
     return (
         <>
             <div className="bg-gradient-to-b from-[#0056B9] to-[#FFD800] via-[#888] from-25% via-50% to-75%">
@@ -33,11 +38,10 @@ export default function App() {
                         border
                     `}>
                     <DebugBar serverConnectionState={serverConnectionState} browserName={getBrowserName()} />
-                    <h1 className="flex flex-col gap-2 text-4xl font-bold text-center text-slate-700 font-montserrat_alternates text-white">
-                        <span className="italic">Conversational</span>
-                        Ukrainian
-                    </h1>
-                    <StartButton />
+
+                    {appState === 'welcome' && <Welcome start={start} />}
+                    {appState === 'speech-to-speech' && <SpeechToSpeech sendSpeechAudio={sendSpeechAudio} />}
+
                     <Footer />
                 </main>
             </div >
