@@ -1,0 +1,1 @@
+export { default as sendSpeechAudio } from './sendSpeechAudio';
