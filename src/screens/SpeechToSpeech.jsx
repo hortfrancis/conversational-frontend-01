@@ -8,13 +8,13 @@ export default function SpeechToSpeech() {
 
     return (
         <div className={`
-            w-full h-[80vh]
-            flex flex-col gap-10 items-center justify-center 
-            bg-white bg-opacity-80  rounded-xl
+            w-full h-screen 
         `}>
-            <AssistantIcon thinking={thinking} />
-            <AssistantTextOutputArea assistantTextOutput={assistantTextOutput} />
-            <SpeakSendButton />
-        </div>
+            <div className="h-full py-16 flex flex-col gap-10 items-center justify-between ">
+                <AssistantIcon thinking={thinking} />
+                <AssistantTextOutputArea assistantTextOutput={assistantTextOutput} />
+                <SpeakSendButton />
+            </div>
+        </div >
     )
 }

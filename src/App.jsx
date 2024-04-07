@@ -37,12 +37,13 @@ export default function App() {
                         font-montserrat tracking-wider 
                         border
                     `}>
-                    <DebugBar serverConnectionState={serverConnectionState} browserName={getBrowserName()} />
+
+                    {appState === 'welcome' && <DebugBar serverConnectionState={serverConnectionState} browserName={getBrowserName()} />}
 
                     {appState === 'welcome' && <Welcome start={start} />}
                     {appState === 'speech-to-speech' && <SpeechToSpeech />}
 
-                    <Footer />
+                    {appState === 'welcome' && <Footer />}
                 </main>
             </div >
         </>
