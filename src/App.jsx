@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Welcome, SpeechToSpeech } from './screens';
 import { DebugBar, Footer, SpeechInput } from './components';
-import { sendSpeechAudio } from './lib';
+
 import { getBrowserName } from './utils';
 
 export default function App() {
@@ -40,7 +40,7 @@ export default function App() {
                     <DebugBar serverConnectionState={serverConnectionState} browserName={getBrowserName()} />
 
                     {appState === 'welcome' && <Welcome start={start} />}
-                    {appState === 'speech-to-speech' && <SpeechToSpeech sendSpeechAudio={sendSpeechAudio} />}
+                    {appState === 'speech-to-speech' && <SpeechToSpeech />}
 
                     <Footer />
                 </main>

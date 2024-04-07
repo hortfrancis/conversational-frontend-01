@@ -6,7 +6,7 @@ export { default as StartButton } from './StartButton';
 
 // SpeechToSpeech screen
 export { default as AssistantIcon } from './AssistantIcon';
-export { default as AssistantTextOutput } from './AssistantTextOutput';
+export { default as AssistantTextOutputArea } from './AssistantTextOutputArea';
 export { default as SpeakSendButton } from './SpeakSendButton';
 
 export {default as Footer } from './Footer';
