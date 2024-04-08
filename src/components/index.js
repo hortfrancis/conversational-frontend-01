@@ -4,10 +4,11 @@ export { default as DebugBar } from './DebugBar';
 export { default as WelcomeHeading } from './WelcomeHeading';
 export { default as StartButton } from './StartButton';
 
-// SpeechToSpeech screen
+// Greet screen
+export { default as AssistantAudioPlayer } from './AssistantAudioPlayer';
 export { default as AssistantIcon } from './AssistantIcon';
 export { default as AssistantTextOutputArea } from './AssistantTextOutputArea';
-export { default as SpeakSendButton } from './SpeakSendButton';
+export { default as HoldToSpeakButton } from './HoldToSpeakButton';
 export { default as MicrophoneIcon } from './MicrophoneIcon';
 
 export {default as Footer } from './Footer';

@@ -1,2 +1,2 @@
 export {default as Welcome} from './Welcome';
-export {default as SpeechToSpeech} from './SpeechToSpeech';
+export {default as Greet} from './Greet';
