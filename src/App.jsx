@@ -7,6 +7,7 @@ import { getBrowserName } from './utils';
 export default function App() {
     const [serverConnectionState, setServerConnectionState] = useState('');
     const [appState, setAppState] = useState('welcome');
+    const [recording, setRecording] = useState(false);
 
     useEffect(() => {
         // Make a generic request to the backend to wake up the server
@@ -41,7 +42,7 @@ export default function App() {
                     {appState === 'welcome' && <DebugBar serverConnectionState={serverConnectionState} browserName={getBrowserName()} />}
 
                     {appState === 'welcome' && <Welcome start={start} />}
-                    {appState === 'speech-to-speech' && <SpeechToSpeech />}
+                    {appState === 'speech-to-speech' && <SpeechToSpeech recording={recording} setRecording={setRecording} />}
 
                     {appState === 'welcome' && <Footer />}
                 </main>
