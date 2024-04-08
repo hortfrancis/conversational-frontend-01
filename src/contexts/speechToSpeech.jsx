@@ -9,10 +9,9 @@ export function SpeechToSpeechProvider({ children }) {
     const [mediaRecorder, setMediaRecorder] = useState(null);
     const [recording, setRecording] = useState(false);
     const [responseData, setResponseData] = useState(null);
-    const [task, setTask] = useState('');
 
-    const { currentTask } = useApp();
-    const { assistantTextOutput, setAssistantTextOutput } = useAssistant();
+    const { appState, setAppState, currentTask } = useApp();
+    const { setCurrentAudio, assistantTextOutput, setAssistantTextOutput } = useAssistant();
 
     useEffect(() => {
         // Every time audioChunks changes, check if we should send the audio to the server
@@ -27,10 +26,13 @@ export function SpeechToSpeechProvider({ children }) {
 
     useEffect(() => {
         (async () => {
-            // console.log("JSON.stringify(responseData):", JSON.stringify(await responseData));
+            if (!responseData) return;
             responseData.then((data) => {
-                if (data?.learn) {
+                if (currentTask === 'greet-proceed-choose' && data?.learn) {
                     console.log("We are going to be learning Ukrainian!")
+
+                    setCurrentAudio('audio/lets-learn01.mp3');
+                    setAssistantTextOutput("Great! Let's learn some Ukrainian.");
                 } else {
                     console.log("No learning today!")
                 }
@@ -72,8 +74,6 @@ export function SpeechToSpeechProvider({ children }) {
             setRecording,
             startRecording,
             stopRecording,
-            task,
-            setTask
         }}>
             {children}
         </SpeechToSpeechContext.Provider>
