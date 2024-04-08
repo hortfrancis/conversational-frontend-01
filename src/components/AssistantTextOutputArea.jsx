@@ -1,6 +1,8 @@
+import { useAssistant } from "../contexts"
 
+export default function AssistantTextOutputArea() {
 
-export default function AssistantTextOutputArea({ assistantTextOutput }) {
+    const { assistantTextOutput } = useAssistant();
 
     return (
         <div className=" bg-white w-full p-4 text-center italic">

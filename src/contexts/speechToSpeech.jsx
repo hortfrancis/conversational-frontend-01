@@ -1,23 +1,42 @@
-import { useState, useEffect, useContext, createContext } from 'react';
+import { useState, useEffect, createContext, useContext } from 'react';
 import { sendSpeechAudio } from '../lib';
+import { useApp, useAssistant } from '.';
 
 const SpeechToSpeechContext = createContext();
 
 export function SpeechToSpeechProvider({ children }) {
-    // State variables here
     const [audioChunks, setAudioChunks] = useState([]);
     const [mediaRecorder, setMediaRecorder] = useState(null);
     const [recording, setRecording] = useState(false);
+    const [responseData, setResponseData] = useState(null);
+    const [task, setTask] = useState('');
+
+    const { currentTask } = useApp();
+    const { assistantTextOutput, setAssistantTextOutput } = useAssistant();
 
     useEffect(() => {
         // Every time audioChunks changes, check if we should send the audio to the server
         if (!recording && audioChunks.length > 0) {
             (async () => {
-                sendSpeechAudio(audioChunks);
+                // Package the task for the langauge model with the audio
+                setResponseData(sendSpeechAudio(audioChunks, currentTask));
                 setAudioChunks([]);
             })();
         }
     }, [audioChunks]);
+
+    useEffect(() => {
+        (async () => {
+            // console.log("JSON.stringify(responseData):", JSON.stringify(await responseData));
+            responseData.then((data) => {
+                if (data?.learn) {
+                    console.log("We are going to be learning Ukrainian!")
+                } else {
+                    console.log("No learning today!")
+                }
+            });
+        })();
+    }, [responseData]);
 
     async function startRecording() {
         try {
@@ -52,7 +71,9 @@ export function SpeechToSpeechProvider({ children }) {
             recording,
             setRecording,
             startRecording,
-            stopRecording
+            stopRecording,
+            task,
+            setTask
         }}>
             {children}
         </SpeechToSpeechContext.Provider>

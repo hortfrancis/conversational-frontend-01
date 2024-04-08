@@ -1,12 +1,16 @@
-import { useEffect, useState } from 'react';
-import { SpeechToSpeechProvider } from './contexts';
+import { useEffect } from 'react';
+import { SpeechToSpeechProvider, AssistantProvider } from './contexts';
+import { useApp } from './contexts';
 import { Welcome, Greet } from './screens';
 import { DebugBar, Footer } from './components';
 import { getBrowserName } from './utils';
 
 export default function App() {
-    const [serverConnectionState, setServerConnectionState] = useState('');
-    const [appState, setAppState] = useState('welcome');
+
+    const { appState, setAppState, serverConnectionState, setServerConnectionState, setCurrentTask } = useApp();
+
+    // const [serverConnectionState, setServerConnectionState] = useState('');
+    // const [appState, setAppState] = useState('welcome');
 
     useEffect(() => {
         // Make a generic request to the backend to wake up the server
@@ -26,6 +30,7 @@ export default function App() {
     const start = () => {
         console.log("Starting speech-to-speech");
         setAppState('greet');
+        setCurrentTask('greet-proceed-choose');
     }
 
     return (
@@ -42,9 +47,11 @@ export default function App() {
 
                     {appState === 'welcome' && <Welcome start={start} />}
 
-                    <SpeechToSpeechProvider>
-                        {appState === 'greet' && <Greet />}
-                    </SpeechToSpeechProvider>
+                    <AssistantProvider>
+                        <SpeechToSpeechProvider>
+                            {appState === 'greet' && <Greet />}
+                        </SpeechToSpeechProvider>
+                    </AssistantProvider>
 
                     {appState === 'welcome' && <Footer />}
                 </main>
