@@ -1,16 +1,8 @@
+import { useSpeechToSpeech } from '../contexts/speechToSpeech';
 import { MicrophoneIcon } from ".";
 
-export default function HoldToSpeakButton({ recording, setRecording }) {
-
-    function startRecording() {
-        console.log('Recording started');
-        setRecording(true);
-    }
-
-    function stopRecording() {
-        console.log('Recording stopped');
-        setRecording(false);
-    }
+export default function HoldToSpeakButton() {
+    const { startRecording, stopRecording } = useSpeechToSpeech();
 
     return (
         <button
@@ -29,15 +21,10 @@ export default function HoldToSpeakButton({ recording, setRecording }) {
             transition-all duration-100 ease-in-out
     `}>
             <div className="h-full py-8 flex flex-col items-center justify-between select-none">
-                <span className="text-2xl font-semibold">
-                    Hold to
-                </span>
-                <span className="text-5xl font-extrabold">
-                    speak
-                </span>
-
+                <span className="text-2xl font-semibold">Hold to</span>
+                <span className="text-5xl font-extrabold">speak</span>
                 <div className="w-20 mt-6">
-                    <MicrophoneIcon recording={recording} />
+                    <MicrophoneIcon />
                 </div>
             </div>
         </button>

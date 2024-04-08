@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Welcome, SpeechToSpeech } from './screens';
-import { DebugBar, Footer, SpeechInput } from './components';
-
+import { SpeechToSpeechProvider } from './contexts';
+import { Welcome, Greet } from './screens';
+import { DebugBar, Footer } from './components';
 import { getBrowserName } from './utils';
 
 export default function App() {
     const [serverConnectionState, setServerConnectionState] = useState('');
     const [appState, setAppState] = useState('welcome');
-    const [recording, setRecording] = useState(false);
 
     useEffect(() => {
         // Make a generic request to the backend to wake up the server
@@ -26,7 +25,7 @@ export default function App() {
 
     const start = () => {
         console.log("Starting speech-to-speech");
-        setAppState('speech-to-speech');
+        setAppState('greet');
     }
 
     return (
@@ -42,7 +41,10 @@ export default function App() {
                     {appState === 'welcome' && <DebugBar serverConnectionState={serverConnectionState} browserName={getBrowserName()} />}
 
                     {appState === 'welcome' && <Welcome start={start} />}
-                    {appState === 'speech-to-speech' && <SpeechToSpeech recording={recording} setRecording={setRecording} />}
+
+                    <SpeechToSpeechProvider>
+                        {appState === 'greet' && <Greet />}
+                    </SpeechToSpeechProvider>
 
                     {appState === 'welcome' && <Footer />}
                 </main>
