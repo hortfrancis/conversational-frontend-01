@@ -10,7 +10,7 @@ export function SpeechToSpeechProvider({ children }) {
     const [recording, setRecording] = useState(false);
     const [responseData, setResponseData] = useState(null);
 
-    const { appState, setAppState, currentTask } = useApp();
+    const { appState, setAppState, currentTask, setCurrentTask } = useApp();
     const { setCurrentAudio, assistantTextOutput, setAssistantTextOutput } = useAssistant();
 
     useEffect(() => {
@@ -28,14 +28,24 @@ export function SpeechToSpeechProvider({ children }) {
         (async () => {
             if (!responseData) return;
             responseData.then((data) => {
-                if (currentTask === 'greet-proceed-choose' && data?.learn) {
-                    console.log("We are going to be learning Ukrainian!")
+                if (currentTask === 'greet-proceed-choose')
+                    if (data?.learn) {
+                        console.log("We are going to be learning Ukrainian!")
 
-                    setCurrentAudio('audio/lets-learn01.mp3');
-                    setAssistantTextOutput("Great! Let's learn some Ukrainian.");
-                } else {
-                    console.log("No learning today!")
+                        setCurrentAudio('audio/lets-learn01.mp3');
+                        setAssistantTextOutput("Great! Let's learn some Ukrainian.");
+                    } else {
+                        console.log("No learning today!")
+                        setCurrentAudio('audio/not-learn-do-instead01.mp3');
+                        setAssistantTextOutput("What would you like to do instead?");
+                        setCurrentTask('choose-activity');
+                    }
+                if (currentTask === 'choose-activity') {
+                    console.log("No other activities supported yet!");
+                    setCurrentAudio('audio/only-prototype-feedback-here01.mp3');
+                    setAssistantTextOutput("I’m sorry, this app is only a prototype right now. But you can give feedback here.");
                 }
+
             });
         })();
     }, [responseData]);
