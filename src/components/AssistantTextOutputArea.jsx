@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useAssistant } from "../contexts"
 
-export default function AssistantTextOutputArea() {
+export default function AssistantTextOutputArea({ size }) {
     const { assistantTextOutput } = useAssistant();
     const [displayedText, setDisplayedText] = useState('');
 
     useEffect(() => {
-        setDisplayedText(''); 
-        
+        setDisplayedText('');
+
         if (assistantTextOutput.length === 0) {
             return; // If there's no text, don't run the typing effect.
         }
@@ -25,8 +25,8 @@ export default function AssistantTextOutputArea() {
     }, [assistantTextOutput]);
 
     return (
-        <div className=" bg-white w-full p-4 text-center italic leading-loose">
-            <div className="h-full flex items-center p-10 border-t-2 border-b-2">
+        <div className={`bg-white w-full p-4 text-center text-sm italic leading-loose`}>
+            <div className="h-full flex items-center p-4 border-t-2 border-b-2">
                 <p className="w-full">{displayedText}</p>
             </div>
         </div>

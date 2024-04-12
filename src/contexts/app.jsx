@@ -8,6 +8,12 @@ export function AppProvider({ children }) {
     const [nextState, setNextState] = useState('');  // Will be set after current audio finishes
     const [currentTask, setCurrentTask] = useState('none');
 
+    // Debugging 
+    useEffect(() => {
+        setAppState('learn');
+    }, []);
+
+
     return (
         <AppContext.Provider value={{
             serverConnectionState,

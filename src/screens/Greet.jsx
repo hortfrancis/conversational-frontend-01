@@ -8,9 +8,11 @@ export default function Greet() {
         <div className={"w-full h-screen"}>
             <div className="h-full py-16 flex flex-col gap-10 items-center justify-between ">
                 <AssistantAudioPlayer />
-                <AssistantIcon />
+                <div className="w-32">
+                    <AssistantIcon />
+                </div>
                 <AssistantTextOutputArea />
-                <HoldToSpeakButton />
+                <HoldToSpeakButton size="large" />
             </div>
         </div >
     )
