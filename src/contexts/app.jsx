@@ -15,6 +15,8 @@ export function AppProvider({ children }) {
         setCurrentLessonData(getLessonData(currentLessonId));
     }, [currentLessonId]);
 
+    
+
     return (
         <AppContext.Provider value={{
             serverConnectionState,

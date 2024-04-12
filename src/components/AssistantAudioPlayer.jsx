@@ -11,9 +11,9 @@ export default function AssistantAudioPlayer() {
         const audio = new Audio(currentAudio);
         audio.play()
             .catch(error => console.error("Error playing audio:", error))
-            .finally(() => {
+            // .then(() => {
                 setPlayingAudio(true);
-            });
+            // });
         // Add a timeout of 1 second after the audio finishes
         audio.onended = () => { setTimeout(() => setPlayingAudio(false), 1000) };
 

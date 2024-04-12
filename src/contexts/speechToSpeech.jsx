@@ -47,6 +47,15 @@ export function SpeechToSpeechProvider({ children }) {
                     setCurrentAudio('audio/only-prototype-feedback-here01.mp3');
                     setAssistantTextOutput("I’m sorry, this app is only a prototype right now. But you can give feedback here.");
                 }
+                if (currentTask === 'say-pryvit') {
+                    console.log('data:', data);
+                    if (data?.understood) {
+                        console.log("You said 'pryvit' correctly!");
+                    } else {
+                        console.log("You didn't say 'pryvit' correctly!");
+                        console.log("Guidance:", data.guidance);
+                    }
+                }
 
             });
         })();
