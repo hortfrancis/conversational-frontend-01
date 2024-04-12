@@ -1,20 +1,36 @@
-import { useState, createContext, useContext } from 'react';
+import { useState, createContext, useContext, useEffect } from 'react';
+import { getLessonData } from '../lib';
 
 const AppContext = createContext();
 
 export function AppProvider({ children }) {
     const [serverConnectionState, setServerConnectionState] = useState('');
     const [appState, setAppState] = useState('welcome');
+    const [nextState, setNextState] = useState('');  // Will be set after current audio finishes
     const [currentTask, setCurrentTask] = useState('none');
+    const [currentLessonId, setCurrentLessonId] = useState(1);
+    const [currentLessonData, setCurrentLessonData] = useState(null);
+
+    useEffect(() => {
+        setCurrentLessonData(getLessonData(currentLessonId));
+    }, [currentLessonId]);
+
+    
 
     return (
         <AppContext.Provider value={{
             serverConnectionState,
             setServerConnectionState,
             appState,
-            setAppState, 
+            setAppState,
             currentTask,
-            setCurrentTask
+            setCurrentTask,
+            nextState,
+            setNextState,
+            currentLessonId,
+            setCurrentLessonId,
+            currentLessonData,
+            setCurrentLessonData
         }}>
             {children}
         </AppContext.Provider>

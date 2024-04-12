@@ -11,6 +11,9 @@ export { default as AssistantTextOutputArea } from './AssistantTextOutputArea';
 export { default as HoldToSpeakButton } from './HoldToSpeakButton';
 export { default as MicrophoneIcon } from './MicrophoneIcon';
 
-export {default as Footer } from './Footer';
+// Learn screen
+export { default as LearningGuidanceOutputArea } from './LearningGuidanceOutputArea';
+
+export { default as Footer } from './Footer';
 
 export { default as SpeechInput } from './SpeechInput';

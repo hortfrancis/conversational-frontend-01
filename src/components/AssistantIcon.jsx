@@ -11,7 +11,7 @@ export default function AssistantIcon({ thinking }) {
     }
 
     return (
-        <div className={`w-32 ${thinking ? 'animate-pulse' : 'animate-none'}`}>
+        <div className={`w-full ${thinking ? 'animate-pulse' : 'animate-none'}`}>
             <svg width="100%" height="100%" viewBox="0 0 207 210" xmlns="http://www.w3.org/2000/svg">
                 {/* Outer lines */}
                 <path d="M172.857 64.7529L103 25" stroke={styles.line.strokeColour} strokeWidth={styles.line.strokeWidth}/>

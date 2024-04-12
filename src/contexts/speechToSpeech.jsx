@@ -10,8 +10,8 @@ export function SpeechToSpeechProvider({ children }) {
     const [recording, setRecording] = useState(false);
     const [responseData, setResponseData] = useState(null);
 
-    const { appState, setAppState, currentTask, setCurrentTask } = useApp();
-    const { setCurrentAudio, assistantTextOutput, setAssistantTextOutput } = useAssistant();
+    const { appState, setAppState, currentTask, setCurrentTask, setNextState, setCurrentLessonId } = useApp();
+    const { setCurrentAudio, assistantTextOutput, setAssistantTextOutput, playingAudio } = useAssistant();
 
     useEffect(() => {
         // Every time audioChunks changes, check if we should send the audio to the server
@@ -34,21 +34,34 @@ export function SpeechToSpeechProvider({ children }) {
 
                         setCurrentAudio('audio/lets-learn01.mp3');
                         setAssistantTextOutput("Great! Let's learn some Ukrainian.");
+                        setNextState('learn');  // Take the user to the 'Learn' screen next
+                        setCurrentLessonId(1);
                     } else {
                         console.log("No learning today!")
                         setCurrentAudio('audio/not-learn-do-instead01.mp3');
                         setAssistantTextOutput("What would you like to do instead?");
                         setCurrentTask('choose-activity');
                     }
+
                 if (currentTask === 'choose-activity') {
                     console.log("No other activities supported yet!");
                     setCurrentAudio('audio/only-prototype-feedback-here01.mp3');
                     setAssistantTextOutput("I’m sorry, this app is only a prototype right now. But you can give feedback here.");
                 }
 
+                if (currentTask === 'say-pryvit') {
+                    setAssistantTextOutput(data.assistantText);
+                    setCurrentAudio(`data:audio/wav;base64,${data.assistantAudio}`);
+                    if (data?.understood) {
+                        console.log("You said 'pryvit' correctly!");
+                    } else {
+                        console.log("You didn't say 'pryvit' correctly!");
+                    }
+                }
+
             });
         })();
-    }, [responseData]);
+    }, [responseData,]);
 
     async function startRecording() {
         try {
