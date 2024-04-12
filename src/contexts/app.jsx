@@ -1,10 +1,11 @@
-import { useState, createContext, useContext } from 'react';
+import { useState, createContext, useContext, useEffect } from 'react';
 
 const AppContext = createContext();
 
 export function AppProvider({ children }) {
     const [serverConnectionState, setServerConnectionState] = useState('');
     const [appState, setAppState] = useState('welcome');
+    const [nextState, setNextState] = useState('');  // Will be set after current audio finishes
     const [currentTask, setCurrentTask] = useState('none');
 
     return (
@@ -12,9 +13,11 @@ export function AppProvider({ children }) {
             serverConnectionState,
             setServerConnectionState,
             appState,
-            setAppState, 
+            setAppState,
             currentTask,
-            setCurrentTask
+            setCurrentTask,
+            nextState,
+            setNextState
         }}>
             {children}
         </AppContext.Provider>

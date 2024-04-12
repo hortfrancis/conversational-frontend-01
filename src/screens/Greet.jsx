@@ -2,12 +2,7 @@
 // import { useAssistant } from "../contexts";
 import { AssistantAudioPlayer, AssistantIcon, AssistantTextOutputArea, HoldToSpeakButton } from '../components';
 
-export default function Greet({ recording, setRecording, sendSpeechAudio }) {
-    // const { setAssistantTextOutput } = useAssistant();
-
-    // useEffect(() => {
-    //     setAssistantTextOutput("Welcome to your language learning assistant! Would you like to learn some Ukrainian?");
-    // }, [])
+export default function Greet() {
 
     return (
         <div className={"w-full h-screen"}>

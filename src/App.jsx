@@ -1,16 +1,13 @@
 import { useEffect } from 'react';
 import { SpeechToSpeechProvider, AssistantProvider } from './contexts';
 import { useApp } from './contexts';
-import { Welcome, Greet } from './screens';
+import { Welcome, Greet, Learn } from './screens';
 import { DebugBar, Footer } from './components';
 import { getBrowserName } from './utils';
 
 export default function App() {
 
     const { appState, setAppState, serverConnectionState, setServerConnectionState, setCurrentTask } = useApp();
-
-    // const [serverConnectionState, setServerConnectionState] = useState('');
-    // const [appState, setAppState] = useState('welcome');
 
     useEffect(() => {
         // Make a generic request to the backend to wake up the server
@@ -50,6 +47,7 @@ export default function App() {
                     <AssistantProvider>
                         <SpeechToSpeechProvider>
                             {appState === 'greet' && <Greet />}
+                            {appState === 'learn' && <Learn />}
                         </SpeechToSpeechProvider>
                     </AssistantProvider>
 
