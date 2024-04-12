@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { AssistantIcon, LearningGuidanceOutputArea, AssistantTextOutputArea, HoldToSpeakButton } from '../components';
+import { useApp } from '../contexts';
 
 export default function Learn() {
 

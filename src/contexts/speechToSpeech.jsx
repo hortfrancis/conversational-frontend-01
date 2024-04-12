@@ -10,7 +10,7 @@ export function SpeechToSpeechProvider({ children }) {
     const [recording, setRecording] = useState(false);
     const [responseData, setResponseData] = useState(null);
 
-    const { appState, setAppState, currentTask, setCurrentTask, setNextState } = useApp();
+    const { appState, setAppState, currentTask, setCurrentTask, setNextState, setCurrentLessonId } = useApp();
     const { setCurrentAudio, assistantTextOutput, setAssistantTextOutput, playingAudio } = useAssistant();
 
     useEffect(() => {
@@ -35,6 +35,7 @@ export function SpeechToSpeechProvider({ children }) {
                         setCurrentAudio('audio/lets-learn01.mp3');
                         setAssistantTextOutput("Great! Let's learn some Ukrainian.");
                         setNextState('learn');  // Take the user to the 'Learn' screen next
+                        setCurrentLessonId(1);
                     } else {
                         console.log("No learning today!")
                         setCurrentAudio('audio/not-learn-do-instead01.mp3');

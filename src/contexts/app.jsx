@@ -1,4 +1,5 @@
 import { useState, createContext, useContext, useEffect } from 'react';
+import { getLessonData } from '../lib';
 
 const AppContext = createContext();
 
@@ -7,12 +8,12 @@ export function AppProvider({ children }) {
     const [appState, setAppState] = useState('welcome');
     const [nextState, setNextState] = useState('');  // Will be set after current audio finishes
     const [currentTask, setCurrentTask] = useState('none');
+    const [currentLessonId, setCurrentLessonId] = useState(1);
+    const [currentLessonData, setCurrentLessonData] = useState(null);
 
-    // Debugging 
     useEffect(() => {
-        setAppState('learn');
-    }, []);
-
+        setCurrentLessonData(getLessonData(currentLessonId));
+    }, [currentLessonId]);
 
     return (
         <AppContext.Provider value={{
@@ -23,7 +24,11 @@ export function AppProvider({ children }) {
             currentTask,
             setCurrentTask,
             nextState,
-            setNextState
+            setNextState,
+            currentLessonId,
+            setCurrentLessonId,
+            currentLessonData,
+            setCurrentLessonData
         }}>
             {children}
         </AppContext.Provider>
