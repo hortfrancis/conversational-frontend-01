@@ -18,7 +18,8 @@ export function AssistantProvider({ children }) {
     }, [playingAudio]);
 
     useEffect(() => {
-        if (!playingAudio && assistantTask === 'encourage-attempt-pronunciation') {
+        if (!playingAudio && assistantTask === 'encourage-attempt-pronunciation'
+            && currentAudio !== 'audio/did-not-understand01.mp3') {
             setAssistantTextOutput("Can you say that back to me?");
             setCurrentAudio('audio/say-that-back01.mp3')
         }
