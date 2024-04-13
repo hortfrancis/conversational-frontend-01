@@ -10,12 +10,13 @@ export function AppProvider({ children }) {
     const [currentTask, setCurrentTask] = useState('none');
     const [currentLessonId, setCurrentLessonId] = useState(1);
     const [currentLessonData, setCurrentLessonData] = useState(null);
+    const [processing, setProcessing] = useState(false);
 
     useEffect(() => {
         setCurrentLessonData(getLessonData(currentLessonId));
     }, [currentLessonId]);
 
-    
+
 
     return (
         <AppContext.Provider value={{
@@ -30,7 +31,9 @@ export function AppProvider({ children }) {
             currentLessonId,
             setCurrentLessonId,
             currentLessonData,
-            setCurrentLessonData
+            setCurrentLessonData,
+            processing,
+            setProcessing
         }}>
             {children}
         </AppContext.Provider>

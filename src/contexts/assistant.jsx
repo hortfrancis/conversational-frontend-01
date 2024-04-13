@@ -4,7 +4,6 @@ import { useApp } from '.';
 const AssistantContext = createContext();
 
 export function AssistantProvider({ children }) {
-    const [thinking, setThinking] = useState(false);
     const [assistantTextOutput, setAssistantTextOutput] = useState("Welcome to your language learning assistant! Would you like to learn some Ukrainian?");
     const [assistantTask, setAssistantTask] = useState('');
     const [currentAudio, setCurrentAudio] = useState('audio/greet01.mp3');
@@ -18,9 +17,14 @@ export function AssistantProvider({ children }) {
     }, [playingAudio]);
 
     useEffect(() => {
-        if (!playingAudio && assistantTask === 'encourage-attempt-pronunciation') {
+        if (!playingAudio && assistantTask === 'encourage-attempt-pronunciation'
+            && currentAudio !== 'audio/did-not-understand01.mp3') {
             setAssistantTextOutput("Can you say that back to me?");
             setCurrentAudio('audio/say-that-back01.mp3')
+        }
+        if (!playingAudio && assistantTask === 'show-feedback-link') {
+            setAssistantTextOutput("This app is a prototype, and you can give us feedback here.");
+            setCurrentAudio('audio/success-only-prototype-feedback-here01.mp3');
         }
     }, [playingAudio, assistantTask]);
 
@@ -37,8 +41,6 @@ export function AssistantProvider({ children }) {
 
     return (
         <AssistantContext.Provider value={{
-            thinking,
-            setThinking,
             assistantTextOutput,
             setAssistantTextOutput,
             assistantTask,
