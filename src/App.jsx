@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { SpeechToSpeechProvider, AssistantProvider } from './contexts';
 import { useApp } from './contexts';
 import { Welcome, Greet, Learn } from './screens';
-import { DebugBar, Footer } from './components';
+import { Modal, DebugBar, Footer } from './components';
 import { getBrowserName } from './utils';
 
 export default function App() {
@@ -40,6 +40,7 @@ export default function App() {
                         border
                     `}>
 
+                    {getBrowserName() !== 'Chrome' && <Modal text="Unfortunately, only Chrome is supported right now! " />}
                     {appState === 'welcome' && <DebugBar serverConnectionState={serverConnectionState} browserName={getBrowserName()} />}
 
                     {appState === 'welcome' && <Welcome start={start} />}
