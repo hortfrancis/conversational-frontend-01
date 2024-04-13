@@ -4,7 +4,6 @@ import { useApp } from '.';
 const AssistantContext = createContext();
 
 export function AssistantProvider({ children }) {
-    const [thinking, setThinking] = useState(false);
     const [assistantTextOutput, setAssistantTextOutput] = useState("Welcome to your language learning assistant! Would you like to learn some Ukrainian?");
     const [assistantTask, setAssistantTask] = useState('');
     const [currentAudio, setCurrentAudio] = useState('audio/greet01.mp3');
@@ -42,8 +41,6 @@ export function AssistantProvider({ children }) {
 
     return (
         <AssistantContext.Provider value={{
-            thinking,
-            setThinking,
             assistantTextOutput,
             setAssistantTextOutput,
             assistantTask,

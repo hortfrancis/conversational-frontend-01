@@ -10,14 +10,15 @@ export function SpeechToSpeechProvider({ children }) {
     const [recording, setRecording] = useState(false);
     const [responseData, setResponseData] = useState(null);
 
-    const { appState, setAppState, currentTask, setCurrentTask, setNextState, setCurrentLessonId } = useApp();
+    const { appState, setAppState, currentTask, setCurrentTask, setNextState, setCurrentLessonId, setProcessing } = useApp();
     const { currentAudio, setCurrentAudio, assistantTextOutput, setAssistantTextOutput, playingAudio, setAssistantTask } = useAssistant();
 
     useEffect(() => {
         // Every time audioChunks changes, check if we should send the audio to the server
         if (!recording && audioChunks.length > 0) {
+            setProcessing(true);
             (async () => {
-                // Package the task for the langauge model with the audio
+                // Package the task for the langauge model with the audio                
                 setResponseData(sendSpeechAudio(audioChunks, currentTask));
                 setAudioChunks([]);
             })();
@@ -27,7 +28,9 @@ export function SpeechToSpeechProvider({ children }) {
     useEffect(() => {
         (async () => {
             if (!responseData) return;
+
             responseData.then((data) => {
+                setProcessing(false);
 
                 // Error handling for when the user's speech is not understood
                 if (data.error) {
@@ -93,7 +96,7 @@ export function SpeechToSpeechProvider({ children }) {
 
             });
         })();
-    }, [responseData,]);
+    }, [responseData]);
 
     async function startRecording() {
         try {
