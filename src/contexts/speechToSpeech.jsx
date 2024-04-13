@@ -11,7 +11,7 @@ export function SpeechToSpeechProvider({ children }) {
     const [responseData, setResponseData] = useState(null);
 
     const { appState, setAppState, currentTask, setCurrentTask, setNextState, setCurrentLessonId } = useApp();
-    const { setCurrentAudio, assistantTextOutput, setAssistantTextOutput, playingAudio } = useAssistant();
+    const { setCurrentAudio, assistantTextOutput, setAssistantTextOutput, playingAudio, setAssistantTask } = useAssistant();
 
     useEffect(() => {
         // Every time audioChunks changes, check if we should send the audio to the server
@@ -45,7 +45,7 @@ export function SpeechToSpeechProvider({ children }) {
 
                 if (currentTask === 'choose-activity') {
                     console.log("No other activities supported yet!");
-                    setCurrentAudio('audio/only-prototype-feedback-here01.mp3');
+                    setCurrentAudio('audio/sorry-only-prototype-feedback-here01.mp3');
                     setAssistantTextOutput("I’m sorry, this app is only a prototype right now. But you can give feedback here.");
                 }
 
@@ -54,6 +54,9 @@ export function SpeechToSpeechProvider({ children }) {
                     setCurrentAudio(`data:audio/wav;base64,${data.assistantAudio}`);
                     if (data?.understood) {
                         console.log("You said 'pryvit' correctly!");
+                        setTimeout(() => {
+                            setAssistantTask('show-feedback-link');
+                        }, 1000);
                     } else {
                         console.log("You didn't say 'pryvit' correctly!");
                     }

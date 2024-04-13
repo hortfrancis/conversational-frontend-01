@@ -22,6 +22,10 @@ export function AssistantProvider({ children }) {
             setAssistantTextOutput("Can you say that back to me?");
             setCurrentAudio('audio/say-that-back01.mp3')
         }
+        if (!playingAudio && assistantTask === 'show-feedback-link') {
+            setAssistantTextOutput("This app is a prototype, and you can give us feedback here.");
+            setCurrentAudio('audio/success-only-prototype-feedback-here01.mp3');
+        }
     }, [playingAudio, assistantTask]);
 
     useEffect(() => {
