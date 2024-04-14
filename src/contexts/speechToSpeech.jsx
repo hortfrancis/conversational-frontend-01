@@ -76,6 +76,9 @@ export function SpeechToSpeechProvider({ children }) {
                     console.log("No other activities supported yet!");
                     setCurrentAudio('audio/sorry-only-prototype-feedback-here01.mp3');
                     setAssistantTextOutput("I’m sorry, this app is only a prototype right now. But you can give feedback here.");
+                    setTimeout(() => {
+                        setAssistantTask('show-feedback-link-2');  // I don't like this, but it's a quick fix for prototype 1
+                    }, 3000);
                     return;
                 }
 
@@ -86,7 +89,7 @@ export function SpeechToSpeechProvider({ children }) {
                         console.log("You said 'pryvit' correctly!");
                         setTimeout(() => {
                             setAssistantTask('show-feedback-link');
-                        }, 1000);
+                        }, 3000);
                         return;
                     } else {
                         console.log("You didn't say 'pryvit' correctly!");

@@ -18,8 +18,6 @@ export default function AssistantIcon() {
     return (
         <div className={`w-full ${processing ? 'animate-pulse' : 'animate-none'}`}>
 
-        {processing ? 'Processing...' : 'Ready'}
-
             <svg width="100%" height="100%" viewBox="0 0 207 210" xmlns="http://www.w3.org/2000/svg">
                 {/* Outer lines */}
                 <path d="M172.857 64.7529L103 25" stroke={styles.line.strokeColour} strokeWidth={styles.line.strokeWidth} />
@@ -48,6 +46,10 @@ export default function AssistantIcon() {
                 <circle cx="34.1506" cy="65" r="25" transform="rotate(-60 34.1506 65)" fill={styles.circle.fill} />
                 <circle cx="103.433" cy="105" r="25" fill={styles.circle.fill} />
             </svg >
+
+            <div className="w-full flex justify-center mt-4 text-sm">
+                {processing ? 'Processing...' : 'Ready'}
+            </div>
         </div>
     )
 }

@@ -25,8 +25,8 @@ export default function AssistantTextOutputArea({ size }) {
     }, [assistantTextOutput]);
 
     return (
-        <div className={`bg-white w-full p-4 text-center text-sm italic leading-loose`}>
-            <div className="h-full flex items-center p-4 border-t-2 border-b-2">
+        <div className={` bg-white w-full p-4 text-center text-sm italic leading-loose`}>
+            <div className="h-full min-h-20 flex items-center p-4 border-t-2 border-b-2">
                 <p className="w-full">{displayedText}</p>
             </div>
         </div>
