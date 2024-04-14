@@ -40,6 +40,11 @@ export default function App() {
                         border
                     `}>
 
+                    {serverConnectionState === 'requesting'
+                        && <Modal
+                            text="Waking up the server ... This should only take a minute!"
+                            html={`<div class="flex justify-center"><span class="mt-6 text-3xl animate-spin">⏳</span></div>`}
+                        />}
                     {getBrowserName() !== 'Chrome' && <Modal text="Unfortunately, only Chrome is supported right now! " />}
                     {appState === 'welcome' && <DebugBar serverConnectionState={serverConnectionState} browserName={getBrowserName()} />}
 
