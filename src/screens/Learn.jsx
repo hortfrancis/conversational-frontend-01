@@ -8,7 +8,7 @@ export default function Learn() {
 
     return (
 
-        <div className="w-full  bg-white bg-opacity-80 flex flex-col items-center justify-between pt-6">
+        <div className="w-full min-h-screen bg-white bg-opacity-80 flex flex-col items-center justify-between pt-6">
 
             {assistantTask === 'show-feedback-link' && <Modal html={`
             <a href="https://forms.gle/S4QRQA9Xt4esCe5k6" target="_blank" class="p-2 font-bold underline rounded hover:bg-gray-200">Feedback form</a>
@@ -20,7 +20,9 @@ export default function Learn() {
             </div>
             <LearningGuidanceOutputArea />
             <AssistantTextOutputArea />
-            <HoldToSpeakButton size="medium" />
+            <div className="mb-10">
+                <HoldToSpeakButton size="medium" />
+            </div>
         </div>
     )
 
