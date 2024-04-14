@@ -11,6 +11,7 @@ export default function StartButton({ start }) {
                 active:shadow-[0px_0px_0px_6px_black]
                 active:translate-y-[14px]
                 transition-all duration-100 ease-in-out
+                select-none
         `}>
             <span className="text-6xl font-extrabold">
                 Start
